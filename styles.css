@@ -176,9 +176,15 @@ section {
   color: var(--accent-2);
 }
 
-.hero-button {
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   align-self: flex-start;
+}
 
+.hero-button {
   font-size: 14px;
   padding: 1em;
 
@@ -315,6 +321,7 @@ section {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
 }
 
