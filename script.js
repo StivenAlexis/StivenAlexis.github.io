@@ -19,7 +19,6 @@ const translations = {
       "I am interested in transforming business needs into clear technological solutions through requirements analysis, documentation, and teamwork.",
     "about.p3":
       "I am currently seeking to join a team where I can contribute value while continuing to grow professionally.",
-    "about.tech": "My current tech stack",
     "about.videoTitle": "Presentation video",
     "portfolio.highlight": "Portfolio",
     "portfolio.heading": "> Portfolio",
@@ -55,7 +54,6 @@ const translations = {
       "Me interesa transformar las necesidades del negocio en soluciones tecnológicas claras mediante análisis de requisitos, documentación y trabajo en equipo.",
     "about.p3":
       "Busco incorporarme a un equipo donde pueda aportar valor y seguir creciendo profesionalmente.",
-    "about.tech": "Mi stack tecnológico actual",
     "about.videoTitle": "Video de presentación",
     "portfolio.highlight": "Portafolio",
     "portfolio.heading": "> Portafolio",
