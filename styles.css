@@ -350,11 +350,33 @@ section {
 .project-card > p {
   font-size: 12px;
   width: 100%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
+  line-height: 1.5;
+  overflow: visible;
+  display: block;
+  -webkit-box-orient: initial;
+  -webkit-line-clamp: none;
+}
+
+.project-card-actions {
+  margin-top: 8px;
+}
+
+.project-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  color: var(--accent-2);
+  background-color: var(--primary-color);
+  border: 1px solid var(--accent-2);
+  box-shadow: 3px 3px 0px var(--accent-1);
+  text-decoration: none;
+  transition: 250ms ease-in-out;
+}
+
+.project-button:hover {
+  background-color: var(--accent-2);
+  color: var(--primary-color);
+  box-shadow: 4px 4px 0px var(--secondary-color);
 }
 
 .project-img {
