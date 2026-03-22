@@ -19,7 +19,9 @@ const translations = {
       "I am interested in transforming business needs into clear technological solutions through requirements analysis, documentation, and teamwork.",
     "about.p3":
       "I am currently seeking to join a team where I can contribute value while continuing to grow professionally.",
+    "about.videoButton": "Presentation video",
     "about.videoTitle": "Presentation video",
+    "modal.close": "Close",
     "portfolio.highlight": "Portfolio",
     "portfolio.heading": "> Portfolio",
     "project.tetris.title": "Tetris Game",
@@ -54,7 +56,9 @@ const translations = {
       "Me interesa transformar las necesidades del negocio en soluciones tecnológicas claras mediante análisis de requisitos, documentación y trabajo en equipo.",
     "about.p3":
       "Busco incorporarme a un equipo donde pueda aportar valor y seguir creciendo profesionalmente.",
+    "about.videoButton": "Video de presentación",
     "about.videoTitle": "Video de presentación",
+    "modal.close": "Cerrar",
     "portfolio.highlight": "Portafolio",
     "portfolio.heading": "> Portafolio",
     "project.tetris.title": "Juego Tetris",
@@ -91,6 +95,11 @@ function applyLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     if (key && pack[key] !== undefined) el.textContent = pack[key];
+  });
+
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (key && pack[key] !== undefined) el.setAttribute("aria-label", pack[key]);
   });
 
   const langBtn = document.getElementById("lang-toggle");
@@ -139,4 +148,41 @@ if (navToggle && primaryNav) {
       navToggle?.setAttribute("aria-expanded", "false");
     }
   });
+});
+
+const videoModal = document.getElementById("video-modal");
+const presentationVideo = document.getElementById("presentation-video");
+const openVideoModalBtn = document.getElementById("open-video-modal");
+let videoModalPreviousFocus = null;
+
+function openVideoModal() {
+  if (!videoModal) return;
+  videoModalPreviousFocus = document.activeElement;
+  videoModal.hidden = false;
+  document.body.classList.add("video-modal-open");
+  videoModal.querySelector(".video-modal__close")?.focus();
+}
+
+function closeVideoModal() {
+  if (!videoModal) return;
+  presentationVideo?.pause();
+  videoModal.hidden = true;
+  document.body.classList.remove("video-modal-open");
+  if (videoModalPreviousFocus && typeof videoModalPreviousFocus.focus === "function") {
+    videoModalPreviousFocus.focus();
+  }
+}
+
+openVideoModalBtn?.addEventListener("click", openVideoModal);
+
+videoModal?.querySelectorAll("[data-close-modal]").forEach((el) => {
+  el.addEventListener("click", (e) => {
+    if (e.target === el) closeVideoModal();
+  });
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && videoModal && !videoModal.hidden) {
+    closeVideoModal();
+  }
 });
