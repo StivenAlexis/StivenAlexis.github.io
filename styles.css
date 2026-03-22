@@ -467,8 +467,6 @@ body.video-modal-open {
   line-height: 1.5;
   overflow: visible;
   display: block;
-  -webkit-box-orient: initial;
-  -webkit-line-clamp: none;
 }
 
 .project-card-actions {
