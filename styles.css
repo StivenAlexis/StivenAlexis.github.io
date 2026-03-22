@@ -306,6 +306,19 @@ button.hero-button {
   margin-top: 8px;
 }
 
+.about-video-open.hero-button {
+  background-color: var(--primary-color);
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+  box-shadow: 4px 4px 0px var(--accent-1);
+}
+
+.about-video-open.hero-button:hover {
+  background-color: var(--accent-2);
+  color: var(--primary-color);
+  box-shadow: 6px 6px 0px var(--secondary-color);
+}
+
 /* Video modal */
 .video-modal[hidden] {
   display: none !important;
