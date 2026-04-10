@@ -462,20 +462,16 @@ body.video-modal-open {
   width: 100%;
   padding: 1.15rem 1rem 1.25rem;
   border-radius: 8px;
-  border: 2px solid var(--secondary-color);
-  background: linear-gradient(
-    165deg,
-    rgba(165, 201, 202, 0.35) 0%,
-    rgba(231, 246, 242, 0.65) 55%,
-    var(--neutral-2) 100%
-  );
-  box-shadow: 6px 6px 0 var(--accent-1);
+  /* Misma base que header + botón "Presentation video" */
+  background-color: var(--primary-color);
+  border: 1px solid var(--accent-2);
+  box-shadow: 4px 4px 0 var(--accent-1);
 }
 
 .skills-heading {
   font-size: 1.35rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--accent-2);
   margin: 0;
   letter-spacing: -0.02em;
 }
@@ -489,9 +485,9 @@ body.video-modal-open {
 .skill-group {
   padding: 0.85rem 0.95rem;
   border-radius: 8px;
-  border: 1px solid var(--secondary-color);
-  background-color: rgba(255, 255, 255, 0.72);
-  box-shadow: 2px 2px 0 rgba(57, 91, 100, 0.12);
+  border: 1px solid var(--accent-1);
+  background-color: rgba(57, 91, 100, 0.45);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .skill-group__title {
@@ -499,7 +495,7 @@ body.video-modal-open {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--secondary-color);
+  color: var(--accent-1);
   margin: 0 0 10px 0;
 }
 
@@ -517,16 +513,18 @@ body.video-modal-open {
   line-height: 1.35;
   padding: 0.45em 0.75em;
   border-radius: 4px;
-  border: 1px solid var(--secondary-color);
-  color: var(--primary-color);
-  background-color: var(--neutral-2);
-  transition: background-color 200ms ease, border-color 200ms ease,
+  /* Mismo criterio que .lang-toggle sobre header oscuro */
+  border: 1px solid var(--accent-2);
+  color: var(--accent-2);
+  background-color: transparent;
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease,
     transform 200ms ease;
 }
 
 .skill-tag:hover {
-  background-color: var(--accent-2);
-  border-color: var(--primary-color);
+  color: var(--accent-1);
+  border-color: var(--accent-1);
+  background-color: rgba(231, 246, 242, 0.08);
   transform: translateY(-1px);
 }
 
