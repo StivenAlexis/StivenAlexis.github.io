@@ -24,6 +24,23 @@ const translations = {
     "modal.close": "Close",
     "portfolio.highlight": "Portfolio",
     "portfolio.heading": "> Portfolio",
+    "skills.heading": "> Skills",
+    "skills.cat.programming": "Programming & Development",
+    "skills.list.programming":
+      "Python, Java, JavaScript, Node.js, Express, HTML, CSS",
+    "skills.cat.databases": "Databases",
+    "skills.list.databases": "MySQL, MongoDB",
+    "skills.cat.testing": "Testing",
+    "skills.list.testing":
+      "Playwright, Jest, Pytest, Test Automation, Unit Testing",
+    "skills.cat.pm": "Project Management & Methodologies",
+    "skills.list.pm":
+      "Scrum, Kanban, Test Cases, Acceptance Criteria, PERT, CPM",
+    "skills.cat.tools": "Tools",
+    "skills.list.tools": "Git, GitHub, Jira, Trello",
+    "skills.cat.soft": "Soft Skills",
+    "skills.list.soft":
+      "Analytical Thinking, Problem Solving, Teamwork, Adaptability, Communication",
     "project.tetris.title": "Tetris Game",
     "project.backend.title": "Backend Testing Project",
     "project.subtitle": "Project description",
@@ -61,6 +78,23 @@ const translations = {
     "modal.close": "Cerrar",
     "portfolio.highlight": "Portafolio",
     "portfolio.heading": "> Portafolio",
+    "skills.heading": "> Habilidades",
+    "skills.cat.programming": "Programación y desarrollo",
+    "skills.list.programming":
+      "Python, Java, JavaScript, Node.js, Express, HTML, CSS",
+    "skills.cat.databases": "Bases de datos",
+    "skills.list.databases": "MySQL, MongoDB",
+    "skills.cat.testing": "Pruebas",
+    "skills.list.testing":
+      "Playwright, Jest, Pytest, automatización de pruebas, pruebas unitarias",
+    "skills.cat.pm": "Gestión de proyectos y metodologías",
+    "skills.list.pm":
+      "Scrum, Kanban, casos de prueba, criterios de aceptación, PERT, CPM",
+    "skills.cat.tools": "Herramientas",
+    "skills.list.tools": "Git, GitHub, Jira, Trello",
+    "skills.cat.soft": "Habilidades blandas",
+    "skills.list.soft":
+      "Pensamiento analítico, resolución de problemas, trabajo en equipo, adaptabilidad, comunicación",
     "project.tetris.title": "Juego Tetris",
     "project.backend.title": "Proyecto de pruebas backend",
     "project.subtitle": "Descripción del proyecto",
