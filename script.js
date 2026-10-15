@@ -144,8 +144,8 @@ const PROJECTS = [
       es: "ERP, CRM y eLearning de Odoo 17 desplegados con Terraform e integrados con monitoreo y alertas por WhatsApp y email.",
     },
     description: {
-      en: "Academic team project built around a real case study: a regional supermarket chain that suffered a ransomware attack and ran with no centralized system and no monitoring. We designed and deployed a complete cloud environment as code — Odoo 17 as the business platform, Icinga 2 to watch it, and n8n with Evolution API to turn any outage into an instant WhatsApp and email alert. The whole stack is reproducible with a single terraform apply.",
-      es: "Proyecto académico en equipo basado en un caso real: una cadena regional de supermercados que sufrió un ataque de ransomware y operaba sin sistema centralizado ni monitoreo. Diseñamos y desplegamos como código un entorno cloud completo: Odoo 17 como plataforma de negocio, Icinga 2 para vigilarla, y n8n con Evolution API para convertir cualquier caída en una alerta inmediata por WhatsApp y email. Todo el entorno se reproduce con un único terraform apply.",
+      en: "Academic team project built around a real case study: a regional supermarket chain that suffered a ransomware attack and ran with no centralized system and no monitoring. We designed and deployed a complete cloud environment as code — Odoo 17 as the business platform, Icinga 2 to watch it, and n8n with Evolution API to turn any outage into an instant WhatsApp and email alert. The whole stack is reproducible with a single terraform apply. The screenshots below come from a local Docker replica of the same stack (email alerts land in a test mailbox; WhatsApp needs a phone linked through Evolution API).",
+      es: "Proyecto académico en equipo basado en un caso real: una cadena regional de supermercados que sufrió un ataque de ransomware y operaba sin sistema centralizado ni monitoreo. Diseñamos y desplegamos como código un entorno cloud completo: Odoo 17 como plataforma de negocio, Icinga 2 para vigilarla, y n8n con Evolution API para convertir cualquier caída en una alerta inmediata por WhatsApp y email. Todo el entorno se reproduce con un único terraform apply. Las capturas de abajo provienen de una réplica local en Docker del mismo stack (los emails de alerta llegan a un buzón de prueba; WhatsApp requiere un teléfono vinculado mediante Evolution API).",
     },
     highlights: [
       {
@@ -186,6 +186,17 @@ const PROJECTS = [
       { k: "k.role", v: { en: "Terraform & integrations", es: "Terraform e integraciones" } },
       { k: "k.year", v: { en: "2026", es: "2026" } },
     ],
+    images: gallery("odoo", [
+      ["Odoo CRM: sales pipeline with opportunities by stage", "Odoo CRM: pipeline de ventas con oportunidades por etapa"],
+      ["Odoo eLearning: course management for staff training", "Odoo eLearning: gestión de cursos para capacitar al personal"],
+      ["Odoo eLearning website: the course catalog trainees see", "Sitio de eLearning de Odoo: el catálogo de cursos que ve el personal"],
+      ["Icinga 2 watching odoo-server: ping, TCP 8069 and HTTP checks all OK", "Icinga 2 vigilando odoo-server: checks de ping, TCP 8069 y HTTP en OK"],
+      ["Outage: Icinga marks odoo-server as DOWN and raises critical service problems", "Caída: Icinga marca odoo-server como DOWN y levanta problemas críticos de servicio"],
+      ["n8n workflow: Webhook → Switch → WhatsApp (Evolution API) and email", "Workflow de n8n: Webhook → Switch → WhatsApp (Evolution API) y email"],
+      ["n8n run triggered by the Icinga webhook: the outage branch executed", "Ejecución de n8n disparada por el webhook de Icinga: se ejecutó la rama de caída"],
+      ["Alert email received automatically when Odoo went down", "Email de alerta recibido automáticamente cuando Odoo se cayó"],
+      ["Recovery notice sent once Odoo came back", "Aviso de recuperación enviado cuando Odoo volvió"],
+    ]),
     links: [{ kind: "repo", url: "https://github.com/StivenAlexis/odoo-aws-terraform" }],
   },
   {
@@ -821,24 +832,45 @@ function odooDiagram() {
 
 function buildGallery(p) {
   let cur = 0;
+  const slides = (p.diagram
+    ? [{ diagram: true, alt: { en: "Architecture: Terraform builds a VPC with Odoo, Icinga and n8n; Icinga checks Odoo and alerts through n8n", es: "Arquitectura: Terraform crea una VPC con Odoo, Icinga y n8n; Icinga vigila Odoo y avisa a través de n8n" } }]
+    : []
+  ).concat(p.images);
   const img = el("img", { decoding: "async" });
+  const diagram = el("div", { class: "gallery__diagram" });
   const count = el("span", { class: "gallery__count mono" });
-  const thumbs = p.images.map((im, i) =>
-    el("button", { type: "button", class: "gallery__thumb", "aria-label": `${i + 1} / ${p.images.length}`, onclick: () => show(i) }, [
-      el("img", { src: im.src, alt: "", loading: "lazy", decoding: "async" }),
-    ])
+  const caption = el("p", { class: "gallery__caption" });
+  const thumbs = slides.map((sl, i) =>
+    el(
+      "button",
+      { type: "button", class: "gallery__thumb", "aria-label": `${i + 1} / ${slides.length}`, onclick: () => show(i) },
+      sl.diagram
+        ? el("span", { class: "gallery__thumb-diagram mono", text: "◇" })
+        : el("img", { src: sl.src, alt: "", loading: "lazy", decoding: "async" })
+    )
   );
   function show(i) {
-    cur = (i + p.images.length) % p.images.length;
-    img.src = p.images[cur].src;
-    img.alt = L(p.images[cur].alt);
-    count.textContent = `${pad(cur + 1)} / ${pad(p.images.length)}`;
+    cur = (i + slides.length) % slides.length;
+    const sl = slides[cur];
+    if (sl.diagram) {
+      diagram.innerHTML = odooDiagram();
+      diagram.hidden = false;
+      img.hidden = true;
+    } else {
+      img.src = sl.src;
+      img.alt = L(sl.alt);
+      img.hidden = false;
+      diagram.hidden = true;
+    }
+    caption.textContent = L(sl.alt);
+    count.textContent = `${pad(cur + 1)} / ${pad(slides.length)}`;
     thumbs.forEach((t, k) => t.setAttribute("aria-current", String(k === cur)));
   }
   const nav = (dir, label, glyph) =>
     el("button", { type: "button", class: `gallery__nav gallery__nav--${dir < 0 ? "prev" : "next"}`, "aria-label": label, onclick: () => show(cur + dir), text: glyph });
   const wrap = el("div", { class: "gallery" }, [
-    el("div", { class: "gallery__main" }, [img, count, nav(-1, ui("modal.prev"), "‹"), nav(1, ui("modal.next"), "›")]),
+    el("div", { class: "gallery__main" }, [img, diagram, count, nav(-1, ui("modal.prev"), "‹"), nav(1, ui("modal.next"), "›")]),
+    caption,
     el("div", { class: "gallery__thumbs" }, thumbs),
   ]);
   show(0);
@@ -851,9 +883,7 @@ function renderDrawer() {
   const next = PROJECTS[(openIdx + 1) % PROJECTS.length];
   $("#drawer-count").textContent = `${pad(openIdx + 1)} / ${pad(PROJECTS.length)}`;
 
-  const coverBlock = p.diagram
-    ? el("div", { class: "d-cover d-cover--diagram", html: odooDiagram() })
-    : p.images
+  const coverBlock = p.images
     ? buildGallery(p)
     : el("div", { class: "d-cover" }, [
         el("div", { style: `position:absolute;inset:0;background:${cover(p.hue)}` }),
